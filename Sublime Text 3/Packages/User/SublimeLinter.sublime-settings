@@ -1,0 +1,10 @@
+{
+	"user":
+	{
+		"lint_mode": "save only",
+		"linters":
+		{
+		},
+		"mark_style": "fill"
+	}
+}

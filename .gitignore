@@ -1,0 +1,7 @@
+*.swp
+.netrwhist
+
+Sublime Text 3/Backup/*
+Sublime Text 3/Cache/*
+Sublime Text 3/Index/*
+Sublime Text 3/Local/*
