@@ -7,7 +7,7 @@ Website:     https://wakatime.com/
 ==========================================================="""
 
 
-__version__ = '5.0.1'
+__version__ = '6.0.8'
 
 
 import sublime
@@ -22,7 +22,8 @@ import threading
 import urllib
 import webbrowser
 from datetime import datetime
-from subprocess import Popen
+from zipfile import ZipFile
+from subprocess import Popen, STDOUT, PIPE
 try:
     import _winreg as winreg  # py2
 except ImportError:
@@ -30,6 +31,50 @@ except ImportError:
         import winreg  # py3
     except ImportError:
         winreg = None
+
+
+is_py2 = (sys.version_info[0] == 2)
+is_py3 = (sys.version_info[0] == 3)
+
+if is_py2:
+    def u(text):
+        if text is None:
+            return None
+        try:
+            text = str(text)
+            return text.decode('utf-8')
+        except:
+            try:
+                return text.decode(sys.getdefaultencoding())
+            except:
+                try:
+                    return unicode(text)
+                except:
+                    return text
+
+elif is_py3:
+    def u(text):
+        if text is None:
+            return None
+        if isinstance(text, bytes):
+            try:
+                return text.decode('utf-8')
+            except:
+                try:
+                    return text.decode(sys.getdefaultencoding())
+                except:
+                    pass
+        try:
+            return str(text)
+        except:
+            return text
+
+else:
+    raise Exception('Unsupported Python version: {0}.{1}.{2}'.format(
+        sys.version_info[0],
+        sys.version_info[1],
+        sys.version_info[2],
+    ))
 
 
 # globals
@@ -131,6 +176,7 @@ def python_binary():
 
     # look for python in PATH and common install locations
     paths = [
+        os.path.join(os.path.expanduser('~'), '.wakatime', 'python'),
         None,
         '/',
         '/usr/local/bin/',
@@ -158,7 +204,7 @@ def python_binary():
 def set_python_binary_location(path):
     global PYTHON_LOCATION
     PYTHON_LOCATION = path
-    log(DEBUG, 'Python Binary Found: {0}'.format(path))
+    log(DEBUG, 'Found Python at: {0}'.format(path))
 
 
 def find_python_from_registry(location, reg=None):
@@ -210,32 +256,39 @@ def find_python_from_registry(location, reg=None):
                         sub_key=sub_key,
                     ))
     except WindowsError:
-        if SETTINGS.get('debug'):
-            log(DEBUG, 'Could not read registry value "{reg}\\{key}".'.format(
-                reg=reg,
-                key=location,
-            ))
+        log(DEBUG, 'Could not read registry value "{reg}\\{key}".'.format(
+            reg=reg,
+            key=location,
+        ))
 
     return val
 
 
-def find_python_in_folder(folder):
-    path = 'pythonw'
-    if folder is not None:
-        path = os.path.realpath(os.path.join(folder, 'pythonw'))
-    try:
-        Popen([path, '--version'])
-        return path
-    except:
-        pass
+def find_python_in_folder(folder, headless=True):
+    pattern = re.compile(r'\d+\.\d+')
+
     path = 'python'
     if folder is not None:
         path = os.path.realpath(os.path.join(folder, 'python'))
+    if headless:
+        path = u(path) + u('w')
+    log(DEBUG, u('Looking for Python at: {0}').format(path))
     try:
-        Popen([path, '--version'])
-        return path
+        process = Popen([path, '--version'], stdout=PIPE, stderr=STDOUT)
+        output, err = process.communicate()
+        output = u(output).strip()
+        retcode = process.poll()
+        log(DEBUG, u('Python Version Output: {0}').format(output))
+        if not retcode and pattern.search(output):
+            return path
     except:
-        pass
+        log(DEBUG, u('Python Version Output: {0}').format(u(sys.exc_info()[1])))
+
+    if headless:
+        path = find_python_in_folder(folder, headless=False)
+        if path is not None:
+            return path
+
     return None
 
 
@@ -363,12 +416,23 @@ class SendHeartbeatThread(threading.Thread):
         if python_binary():
             cmd.insert(0, python_binary())
             log(DEBUG, ' '.join(obfuscate_apikey(cmd)))
-            if platform.system() == 'Windows':
-                Popen(cmd, shell=False)
-            else:
-                with open(os.path.join(os.path.expanduser('~'), '.wakatime.log'), 'a') as stderr:
-                    Popen(cmd, stderr=stderr)
-            self.sent()
+            try:
+                if not self.debug:
+                    Popen(cmd)
+                    self.sent()
+                else:
+                    process = Popen(cmd, stdout=PIPE, stderr=STDOUT)
+                    output, err = process.communicate()
+                    output = u(output)
+                    retcode = process.poll()
+                    if (not retcode or retcode == 102) and not output:
+                        self.sent()
+                    if retcode:
+                        log(DEBUG if retcode == 102 else ERROR, 'wakatime-core exited with status: {0}'.format(retcode))
+                    if output:
+                        log(ERROR, u('wakatime-core output: {0}').format(output))
+            except:
+                log(ERROR, u(sys.exc_info()[1]))
         else:
             log(ERROR, 'Unable to find python binary.')
 
@@ -389,28 +453,40 @@ class SendHeartbeatThread(threading.Thread):
         }
 
 
-class InstallPython(threading.Thread):
-    """Non-blocking thread for installing Python on Windows machines.
+class DownloadPython(threading.Thread):
+    """Non-blocking thread for extracting embeddable Python on Windows machines.
     """
 
     def run(self):
-        log(INFO, 'Downloading and installing python...')
-        url = 'https://www.python.org/ftp/python/3.4.3/python-3.4.3.msi'
-        if platform.architecture()[0] == '64bit':
-            url = 'https://www.python.org/ftp/python/3.4.3/python-3.4.3.amd64.msi'
-        python_msi = os.path.join(os.path.expanduser('~'), 'python.msi')
+        log(INFO, 'Downloading embeddable Python...')
+
+        ver = '3.5.0'
+        arch = 'amd64' if platform.architecture()[0] == '64bit' else 'win32'
+        url = 'https://www.python.org/ftp/python/{ver}/python-{ver}-embed-{arch}.zip'.format(
+            ver=ver,
+            arch=arch,
+        )
+
+        if not os.path.exists(os.path.join(os.path.expanduser('~'), '.wakatime')):
+            os.makedirs(os.path.join(os.path.expanduser('~'), '.wakatime'))
+
+        zip_file = os.path.join(os.path.expanduser('~'), '.wakatime', 'python.zip')
         try:
-            urllib.urlretrieve(url, python_msi)
+            urllib.urlretrieve(url, zip_file)
         except AttributeError:
-            urllib.request.urlretrieve(url, python_msi)
-        args = [
-            'msiexec',
-            '/i',
-            python_msi,
-            '/norestart',
-            '/qb!',
-        ]
-        Popen(args)
+            urllib.request.urlretrieve(url, zip_file)
+
+        log(INFO, 'Extracting Python...')
+        with ZipFile(zip_file) as zf:
+            path = os.path.join(os.path.expanduser('~'), '.wakatime', 'python')
+            zf.extractall(path)
+
+        try:
+            os.remove(zip_file)
+        except:
+            pass
+
+        log(INFO, 'Finished extracting Python.')
 
 
 def plugin_loaded():
@@ -422,7 +498,7 @@ def plugin_loaded():
     if not python_binary():
         log(WARNING, 'Python binary not found.')
         if platform.system() == 'Windows':
-            thread = InstallPython()
+            thread = DownloadPython()
             thread.start()
         else:
             sublime.error_message("Unable to find Python binary!\nWakaTime needs Python to work correctly.\n\nGo to https://www.python.org/downloads")

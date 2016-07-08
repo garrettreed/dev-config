@@ -3,6 +3,75 @@ History
 -------
 
 
+6.0.8 (2016-04-18)
+++++++++++++++++++
+
+- Upgrade wakatime-cli to v5.0.0.
+- Support regex patterns in projectmap config section for renaming projects.
+- Upgrade pytz to v2016.3.
+- Upgrade tzlocal to v1.2.2.
+
+
+6.0.7 (2016-03-11)
+++++++++++++++++++
+
+- Fix bug causing RuntimeError when finding Python location
+
+
+6.0.6 (2016-03-06)
+++++++++++++++++++
+
+- upgrade wakatime-cli to v4.1.13
+- encode TimeZone as utf-8 before adding to headers
+- encode X-Machine-Name as utf-8 before adding to headers
+
+
+6.0.5 (2016-03-06)
+++++++++++++++++++
+
+- upgrade wakatime-cli to v4.1.11
+- encode machine hostname as Unicode when adding to X-Machine-Name header
+
+
+6.0.4 (2016-01-15)
+++++++++++++++++++
+
+- fix UnicodeDecodeError on ST2 with non-English locale
+
+
+6.0.3 (2016-01-11)
+++++++++++++++++++
+
+- upgrade wakatime-cli core to v4.1.10
+- accept 201 or 202 response codes as success from api
+- upgrade requests package to v2.9.1
+
+
+6.0.2 (2016-01-06)
+++++++++++++++++++
+
+- upgrade wakatime-cli core to v4.1.9
+- improve C# dependency detection
+- correctly log exception tracebacks
+- log all unknown exceptions to wakatime.log file
+- disable urllib3 SSL warning from every request
+- detect dependencies from golang files
+- use api.wakatime.com for sending heartbeats
+
+
+6.0.1 (2016-01-01)
+++++++++++++++++++
+
+- use embedded python if system python is broken, or doesn't output a version number
+- log output from wakatime-cli in ST console when in debug mode
+
+
+6.0.0 (2015-12-01)
+++++++++++++++++++
+
+- use embeddable Python instead of installing on Windows
+
+
 5.0.1 (2015-10-06)
 ++++++++++++++++++
 

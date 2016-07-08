@@ -12,14 +12,14 @@ nnoremap <leader>T gT       " Back tab
 " Smart Indent
 filetype plugin indent on
 
-" Backups
+" Say no to backups
 set nobackup
 
 " Clear weird char sequence on start
 set t_RV=
 
 " Highlight current line
-set cursorline
+"set cursorline
 
 " Keep current command in bottom right
 set showcmd
@@ -37,7 +37,6 @@ let NERDTreeShowHidden = 1
 
 " Golang
 au FileType go nmap <leader>r <Plug>(go-run)
-
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -46,8 +45,8 @@ let g:go_highlight_build_constraints = 1
 
 " Colors and  Syntax Highlighting
 syntax enable
-set background=light
-colorscheme solarized
+"set background=light
+"colorscheme solarized
 
 " Bracket/Parentheses match stylen
 " -- must come after color scheme
@@ -63,4 +62,4 @@ if has('autocmd')
 endif
 
 " Tabs
-set tabstop=2 shiftwidth=2 expandtab
+set tabstop=4 shiftwidth=4 expandtab

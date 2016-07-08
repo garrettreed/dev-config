@@ -1,13 +1,12 @@
 sublime-wakatime
 ================
 
-Sublime Text 2 & 3 plugin to quantify your coding using https://wakatime.com/.
+Metrics, insights, and time tracking automatically generated from your programming activity.
+
 
 Installation
 ------------
 
-Heads Up! For Sublime Text 2 on Windows & Linux, WakaTime depends on [Python](http://www.python.org/getit/) being installed to work correctly.
-    
 1. Install [Package Control](https://packagecontrol.io/installation).
 
 2. Using [Package Control](https://packagecontrol.io/docs/usage):
@@ -24,10 +23,24 @@ Heads Up! For Sublime Text 2 on Windows & Linux, WakaTime depends on [Python](ht
 
 5. Visit https://wakatime.com/dashboard to see your logged time.
 
+
 Screen Shots
 ------------
 
-![Project Overview](https://wakatime.com/static/img/ScreenShots/ScreenShot-2014-10-29.png)
+![Project Overview](https://wakatime.com/static/img/ScreenShots/Screen-Shot-2016-03-21.png)
+
+
+Unresponsive Plugin Warning
+---------------------------
+
+In Sublime Text 2, if you get a warning message:
+
+    A plugin (WakaTime) may be making Sublime Text unresponsive by taking too long (0.017332s) in its on_modified callback.
+
+To fix this, go to `Preferences > Settings - User` then add the following setting:
+
+`"detect_slow_plugins": false`
+
 
 Troubleshooting
 ---------------

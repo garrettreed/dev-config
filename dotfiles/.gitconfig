@@ -1,11 +1,11 @@
 [user]
-  name = Garrett Reed
-  email = garrett@airtype.com
+	name = Garrett Reed
+	email = garrett@garrettreed.co
 [color]
   ui = auto
 [core]
   editor = vim
-  excludesfile = ~/.gitignore_global
+	excludesfile = /Users/Garrett/.gitignore_global
 [filter "media"]
   clean = git-media-clean %f
   smudge = git-media-smudge %f
@@ -19,3 +19,9 @@
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustExitCode = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

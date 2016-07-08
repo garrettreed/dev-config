@@ -5,19 +5,20 @@
 	],
 	"installed_packages":
 	[
+		"Base16 Color Schemes",
 		"DocBlockr",
 		"EditorConfig",
 		"Handlebars",
-		"Markdown Extended",
 		"Package Control",
 		"PackageResourceViewer",
 		"Sass",
 		"SideBarEnhancements",
+		"Solarized Color Scheme",
 		"Solarized Toggle",
 		"SublimeHaskell",
 		"SublimeLinter",
 		"SublimeLinter-php",
-		"Theme - itg.flat",
+		"Theme - Sodarized",
 		"WakaTime"
 	]
 }

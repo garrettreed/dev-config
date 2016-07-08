@@ -11,9 +11,10 @@
 
 import logging
 import os
-import sys
+import traceback
 
 from .compat import u
+from .packages.requests.packages import urllib3
 try:
     from collections import OrderedDict  # pragma: nocover
 except ImportError:  # pragma: nocover
@@ -70,8 +71,16 @@ class JsonFormatter(logging.Formatter):
             del data['plugin']
         return CustomEncoder().encode(data)
 
-    def formatException(self, exc_info):
-        return sys.exec_info[2].format_exc()
+
+def traceback_formatter(*args, **kwargs):
+    if 'level' in kwargs and (kwargs['level'].lower() == 'warn' or kwargs['level'].lower() == 'warning'):
+        logging.getLogger('WakaTime').warning(traceback.format_exc())
+    elif 'level' in kwargs and kwargs['level'].lower() == 'info':
+        logging.getLogger('WakaTime').info(traceback.format_exc())
+    elif 'level' in kwargs and kwargs['level'].lower() == 'debug':
+        logging.getLogger('WakaTime').debug(traceback.format_exc())
+    else:
+        logging.getLogger('WakaTime').error(traceback.format_exc())
 
 
 def set_log_level(logger, args):
@@ -82,6 +91,7 @@ def set_log_level(logger, args):
 
 
 def setup_logging(args, version):
+    urllib3.disable_warnings()
     logger = logging.getLogger('WakaTime')
     for handler in logger.handlers:
         logger.removeHandler(handler)
@@ -101,6 +111,9 @@ def setup_logging(args, version):
     )
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+
+    # add custom traceback logging method
+    logger.traceback = traceback_formatter
 
     warnings_formatter = JsonFormatter(datefmt='%Y/%m/%d %H:%M:%S %z')
     warnings_formatter.setup(
