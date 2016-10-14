@@ -49,6 +49,7 @@ fi
 echo "Removing existing dotfiles..."
 rm ~/.bash_profile
 rm ~/.bashrc
+rm ~/.bash_powerline
 rm ~/.vimrc
 rm ~/.tmux.conf
 rm ~/.gitconfig
@@ -59,13 +60,14 @@ rm -rf ~/.vim
 
 # bash
 echo "Linking bash stuff..."
+ln -s /Users/$USER/Development/Mac-Things/dotfiles/.bash_powerline ~/.bash_powerline
 ln -s /Users/$USER/Development/Mac-Things/dotfiles/.bashrc ~/.bashrc
 ln -s /Users/$USER/Development/Mac-Things/dotfiles/.bash_profile ~/.bash_profile
 
 # vim
 echo "Linking vim stuff..."
 ln -s /Users/$USER/Development/Mac-Things/dotfiles/.vimrc ~/.vimrc
-ln -s /Users/$USER/Development/Mac-Things/dotfiles/.vim/ ~/.vim 
+ln -s /Users/$USER/Development/Mac-Things/dotfiles/.vim/ ~/.vim
 
 # git
 echo "Linking git stuff..."
@@ -84,4 +86,3 @@ ln -s /Users/$USER/Development/Mac-Things/Sublime\ Text\ 3/ ~/Library/Applicatio
 # jshintrc
 echo "Linking jshint..."
 ln -s /Users/$USER/Development/Mac-Things/dotfiles/.jshintrc ~/.jshintrc
-
