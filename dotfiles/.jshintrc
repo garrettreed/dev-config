@@ -48,7 +48,7 @@
     "laxcomma"      : false,     // true: Tolerate comma-first style coding
     "loopfunc"      : false,     // true: Tolerate functions being defined in loops
     "multistr"      : false,     // true: Tolerate multi-line strings
-    "proto"         : false,     // true: Tolerate using the `__proto__` property
+    "proto"         : true,      // true: Tolerate using the `__proto__` property
     "scripturl"     : false,     // true: Tolerate script-targeted URLs
     "smarttabs"     : false,     // true: Tolerate mixed tabs/spaces when used for alignment
     "shadow"        : false,     // true: Allows re-define variables later in code e.g. `var x=1; x=2;`
@@ -76,43 +76,45 @@
     "white"         : false,    // true: Check against strict whitespace and indentation rules
     // Custom Globals
     "predef"        : [
-        "angular",
-        "Mongo",
-        "ReactiveVar",
-        "ReactiveDict",
-        "OrderedDict",
+        "_",
+        "_gDB",
+        "$",
         "Accounts",
-        "Session",
-        "Template",
+        "afterAll",
+        "afterEach",
+		"angular",
+		"assert",
+        "Assets",
+        "beforeAll",
+        "beforeEach",
         "check",
-        "Match",
         "Deps",
-        "Tracker",
+        "describe",
         "EJSON",
         "Email",
-        "Package",
-        "Tinytest",
+        "expect",
+        "FS",
+        "Ground",
+        "it",
+        "jasmine",
+        "LocalCollection",
+        "localStorage",
+        "Match",
+        "module",
+        "Mongo",
         "Npm",
-        "Assets",
+        "OrderedDict",
+        "Package",
         "Packages",
         "process",
-        "Ground",
-        "FS",
-        "_gDB",
-        "LocalCollection",
-        "_",
         "Random",
-        "module",
-        "describe",
-        "xdescribe",
-        "beforeEach",
-        "afterEach",
+        "ReactiveDict",
+        "ReactiveVar",
+        "Session",
         "spyOn",
-        "jasmine",
-        "beforeAll",
-        "afterAll",
-        "it",
-        "expect",
-        "$"
+        "Template",
+        "Tinytest",
+        "Tracker",
+        "xdescribe"
     ]
 }
