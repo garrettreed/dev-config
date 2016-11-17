@@ -16,6 +16,8 @@ PATH=$PATH:/opt/local/bin
 
 export PATH
 
+#   Alias
+alias gpr="git pull --rebase"
 
 #   Specific Paths
 export NODE_PATH="/usr/local/lib/node_modules"
