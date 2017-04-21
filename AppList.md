@@ -1,29 +1,34 @@
 # List of Applications
 
 * 1Password
-* Adobe Photoshop CS6
-* CCleaner
+* Adobe Photoshop
+* Alfred 3
+* AppCleaner
+* Atom
+* Chromium
 * Cyberduck
-* DayOne
 * Divvy
 * Dropbox
 * Firefox
 * flux
-* Flycut
-* Keynote
+* IPVanish
 * Last.fm
+* LICEcap
 * MAMP
-* Pocket
+* MS Office
+* Omnifocus
 * Postman
-* RescueTime
-* RoboMongo
-* Seil
+* Quiver
+* Screenhero
 * SelfControl
 * SequelPro
+* Sketch
 * Slack
+* Sourcetree
+* Spotify
 * Sublime Text 3
-* Transmission
+* Tunnelblick
+* uTorrent
 * VirtualBox
 * VLC
 * Xcode
-* XLD

@@ -12,14 +12,21 @@ nnoremap <leader>T gT       " Back tab
 " Smart Indent
 filetype plugin indent on
 
+" Smart case sensitive search
+set ignorecase
+set smartcase
+
 " Say no to backups
 set nobackup
 
 " Clear weird char sequence on start
 set t_RV=
 
+" WTF is ex mode anyway
+nnoremap Q <nop>
+
 " Highlight current line
-"set cursorline
+set cursorline
 
 " Keep current command in bottom right
 set showcmd
@@ -34,6 +41,7 @@ execute pathogen#infect()
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup = 1
 let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['.DS_Store']
 
 " Golang
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -62,4 +70,4 @@ if has('autocmd')
 endif
 
 " Tabs
-set tabstop=4 shiftwidth=4 expandtab
+set tabstop=2 shiftwidth=2 expandtab

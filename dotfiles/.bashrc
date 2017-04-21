@@ -16,10 +16,12 @@ PATH=$PATH:/opt/local/bin
 
 export PATH
 
-
 #   Specific Paths
 export NODE_PATH="/usr/local/lib/node_modules"
 export GOPATH="/Users/$USER/Development/go/"
+
+#   thefuck
+eval $(thefuck --alias) 
 
 #   Util functions
 function md () { mkdir -p "$@" && eval cd "\"\$$#\""; }

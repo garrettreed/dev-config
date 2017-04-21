@@ -86,3 +86,7 @@ ln -s /Users/$USER/Development/Mac-Things/Sublime\ Text\ 3/ ~/Library/Applicatio
 # jshintrc
 echo "Linking jshint..."
 ln -s /Users/$USER/Development/Mac-Things/dotfiles/.jshintrc ~/.jshintrc
+
+# Install Stuff
+brew install thefuck
+brew install mongodb
