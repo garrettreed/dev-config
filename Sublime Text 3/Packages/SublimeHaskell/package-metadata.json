@@ -1,1 +1,0 @@
-{"version": "2016.04.22.23.00.11", "sublime_text": "*", "dependencies": [], "url": "https://github.com/SublimeHaskell/SublimeHaskell", "description": "A Sublime Text 2/3 plugin for Haskell. Features cabal building, error and warning highlighting, smart completion and ghc-mod integration.", "platforms": ["*"]}
