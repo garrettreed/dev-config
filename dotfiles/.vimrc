@@ -1,47 +1,98 @@
+" Don't use coompatible mode
+set nocompatible
+
 " Leader
 let mapleader = ","
+
+" Allows the current buffer to go to the background with changes
+" before writing to disk.
+set hidden
+
+set number                      "Line numbers are good
+set backspace=indent,eol,start  "Allow backspace in insert mode
+set history=1000                "Store lots of :cmdline history
+set showcmd                     "Show incomplete cmds down the bottom
+set showmode                    "Show current mode down the bottom
+set visualbell                  "No sounds
+set autoread                    "Reload files changed outside vim
+set cursorline
+set title
+
+" Intuitive backspacing in insert mode
+set backspace=indent,eol,start
+
+" Highlight search terms
+set hlsearch
+set incsearch " ...dynamically as they are typed.
+
+" Turn of swapfiles
+set noswapfile
+set nobackup
+
+" Disable Ex mode
+" Ex mode allows multiple commands without typing : each time
+" But gets annoying if you type Q accidentaly.
+map q: <Nop>
+nnoremap Q <nop>
 
 " Mappings
 inoremap jk <esc>l
 nnoremap <leader>d dd0      " Line cut
 nnoremap <leader>w <C-w>w   " Forward pane
 nnoremap <leader>W <C-w>W   " Back pane
-nnoremap <leader>t gt       " Forward tab
-nnoremap <leader>T gT       " Back tab
+nnoremap <S-Tab> <<         " shift+tab for un-indent
+inoremap <S-Tab> <C-d>
 
-" Smart Indent
-filetype plugin indent on
+" Auto completion
+set wildmenu
+set wildmode=longest:full,full
 
 " Smart case sensitive search
+" Makes /-style searches case sensitive only
+" if there is a capital letter in the expression
 set ignorecase
 set smartcase
 
-" Say no to backups
-set nobackup
+" Tabs
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
 
-" Clear weird char sequence on start
-set t_RV=
+" Display tabs and trailing spaces visually
+set listchars=tab:>-,trail:·
+nmap <silent> <leader>s :set nolist!<CR>  
+set list
 
-" WTF is ex mode anyway
-nnoremap Q <nop>
+set wrap       "Wrap lines
+set linebreak  "Wrap lines at convenient points
 
-" Highlight current line
-set cursorline
-
-" Keep current command in bottom right
-set showcmd
-
-" Line numbers
-set number
+filetype plugin on
+filetype indent on 
 
 " Pathogen
 execute pathogen#infect()
 
+" MacVim specific
+if has("gui_running")
+  colorscheme lucius 
+  let g:lucius_style='dark'
+  set guifont=Source\ Code\ Pro:h14
+endif
+
+" Colors and Syntax Highlighting
+" -- must come after colorscheme
+syntax enable
+
+
 " NERDTree
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
-let g:nerdtree_tabs_open_on_console_startup = 1
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['.DS_Store']
+autocmd VimEnter * NERDTree
+autocmd BufWinEnter * NERDTreeMirror
 
 " Golang
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -51,23 +102,12 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-" Colors and  Syntax Highlighting
-syntax enable
-"set background=light
-"colorscheme solarized
-
-" Bracket/Parentheses match stylen
+" Bracket/Parentheses match style
 " -- must come after color scheme
 hi MatchParen cterm=underline ctermbg=none ctermfg=none
 
 " History
 set history=700
 
-" Killa Noise
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
-endif
 
-" Tabs
-set tabstop=2 shiftwidth=2 expandtab
+

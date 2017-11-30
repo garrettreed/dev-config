@@ -1,21 +1,24 @@
-# List of Applications
+# Mac Apps
 
 * 1Password
 * Adobe Photoshop
 * Alfred 3
 * AppCleaner
 * Atom
+* Audacity
 * Chromium
 * Cyberduck
 * Divvy
 * Dropbox
 * Firefox
 * flux
+* ImageOptim
 * IPVanish
-* Last.fm
 * LICEcap
+* MacVim
 * MAMP
 * MS Office
+* MuseScore
 * Omnifocus
 * Postman
 * Quiver
