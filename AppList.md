@@ -12,6 +12,7 @@
 * Dropbox
 * Firefox
 * flux
+* HeyFocus
 * ImageOptim
 * IPVanish
 * LICEcap
@@ -23,7 +24,6 @@
 * Postman
 * Quiver
 * Screenhero
-* SelfControl
 * SequelPro
 * Sketch
 * Slack

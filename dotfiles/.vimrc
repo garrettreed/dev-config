@@ -57,24 +57,24 @@ set smartcase
 set autoindent
 set smartindent
 set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 set expandtab
 
 " Display tabs and trailing spaces visually
-set listchars=tab:>-,trail:·
-nmap <silent> <leader>s :set nolist!<CR>  
-set list
+"set listchars=tab:>-,trail:·
+"nmap <silent> <leader>s :set nolist!<CR>  
+"set list
 
 set wrap       "Wrap lines
 set linebreak  "Wrap lines at convenient points
 
-filetype plugin on
-filetype indent on 
-
 " Pathogen
 execute pathogen#infect()
+
+filetype plugin on
+filetype indent on 
 
 " MacVim specific
 if has("gui_running")
@@ -93,6 +93,8 @@ let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['.DS_Store']
 autocmd VimEnter * NERDTree
 autocmd BufWinEnter * NERDTreeMirror
+autocmd VimEnter * wincmd p
+
 
 " Golang
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -109,5 +111,5 @@ hi MatchParen cterm=underline ctermbg=none ctermfg=none
 " History
 set history=700
 
-
-
+" No visual bell
+set vb t_vb=

@@ -92,15 +92,13 @@ __powerline() {
     prompt() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly.
-        if [ $? -eq 0 ]; then
-            local BG_EXIT="$BG_GREEN"
-        else
+        if [ $? -ne 0 ]; then
             local BG_EXIT="$BG_RED"
         fi
 
-        PS1="$BG_BLUE$FG_BASE3 \w $RESET"
-        PS1+="$BG_BLUE$FG_BASE3$(__git_info)$RESET"
-        PS1+="$BG_EXIT$FG_BASE3 $PS_SYMBOL $RESET "
+        PS1="$FG_BASE3 \w $RESET"
+        PS1+="$FG_BASE3$(__git_info)$RESET\n"
+        PS1+="$BG_EXIT$FG_BASE3 $PS_SYMBOL $RESET" 
 
         if [ "$TERM_PROGRAM" == "Apple_Terminal" ]; then
             update_terminal_cwd
