@@ -45,7 +45,7 @@ bind "set show-all-if-ambiguous on"
 #  Colors
 alias ls='ls -GFh'
 
-#  Alias'
+#  Alias
 alias ll='ls -al'
 
 #  History
