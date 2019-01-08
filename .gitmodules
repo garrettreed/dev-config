@@ -1,3 +1,6 @@
 [submodule "dotfiles/.vim/bundle/nerdcommenter"]
 	path = dotfiles/.vim/bundle/nerdcommenter
 	url = git@github.com:scrooloose/nerdcommenter.git
+[submote "dotfiles/.vim/bundle/scratch"]
+    path = dotfiles/.vim/bundle/scratch
+    url = git@github.com:mtth/scratch.vim.git
