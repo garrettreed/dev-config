@@ -4,3 +4,21 @@
 [submote "dotfiles/.vim/bundle/scratch"]
     path = dotfiles/.vim/bundle/scratch
     url = git@github.com:mtth/scratch.vim.git
+[submodule "dotfiles/.vim/bundle/ack.vim"]
+	path = dotfiles/.vim/bundle/ack.vim
+	url = git@github.com:mileszs/ack.vim.git
+[submodule "dotfiles/.vim/bundle/vim-airline"]
+	path = dotfiles/.vim/bundle/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
+[submodule "dotfiles/.vim/bundle/command-t"]
+	path = dotfiles/.vim/bundle/command-t
+	url = git@github.com:wincent/command-t.git
+[submodule "dotfiles/.vim/bundle/nerdtree"]
+	path = dotfiles/.vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "dotfiles/.vim/bundle/nerdtree-git-plugin"]
+	path = dotfiles/.vim/bundle/nerdtree-git-plugin
+	url = git@github.com:Xuyuanp/nerdtree-git-plugin.git
+[submodule "dotfiles/.vim/bundle/vim-lucius"]
+	path = dotfiles/.vim/bundle/vim-lucius
+	url = git@github.com:jonathanfilip/vim-lucius.git
