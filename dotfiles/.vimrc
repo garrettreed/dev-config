@@ -90,19 +90,11 @@ syntax enable
 
 " NERDTree
 let NERDTreeShowHidden = 1
+let g:NERDTreeNodeDelimiter = "\u00a0"
 let NERDTreeIgnore = ['.DS_Store']
 autocmd VimEnter * NERDTree
 autocmd BufWinEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
-
-
-" Golang
-au FileType go nmap <leader>r <Plug>(go-run)
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
 
 " Bracket/Parentheses match style
 " -- must come after color scheme
