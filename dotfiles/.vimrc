@@ -43,6 +43,7 @@ nnoremap <leader>W <C-w>W   " Back pane
 nnoremap <S-Tab> <<         " shift+tab for un-indent
 inoremap <S-Tab> <C-d>
 
+
 " Auto completion
 set wildmenu
 set wildmode=longest:full,full

@@ -1,21 +1,15 @@
 [user]
 	name = Garrett Reed
-	email = garrett@garrettreed.co
+    email = garrett@garrettreed.info
 [color]
-  ui = auto
+    ui = auto
 [core]
-  editor = vim
-	excludesfile = /Users/Garrett/.gitignore_global
+    editor = vim
+    excludesfile = /Users/Garrett/.gitignore_global
 [filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
 [merge]
-	ff = false
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    ff = false
 [commit]
 	template = /Users/garrett/.stCommitMsg
