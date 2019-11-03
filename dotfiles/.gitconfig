@@ -1,6 +1,6 @@
 [user]
 	name = Garrett Reed
-    email = garrett@garrettreed.info
+	email = garrett@garrettreed.info
 [color]
     ui = auto
 [core]
@@ -13,3 +13,5 @@
     ff = false
 [commit]
 	template = /Users/garrett/.stCommitMsg
+[init]
+	templatedir = ~/.git-templates

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+function append {
+    DOSSIER_COMMIT=$(git log --format="$(basename "$PWD"), %H, %ai, %s" -1)
+    cd ~/Code/dossier
+
+    git pull --rebase && \
+    cd - && \
+    echo $DOSSIER_COMMIT >> ~/Code/dossier/commits && \
+    cd ~/Code/dossier && \
+    git add -A && \
+    git commit -m "$DOSSIER_COMMIT" && \
+    git push
+
+    cd -
+}
+
+append > /dev/null 2>&1

@@ -82,8 +82,8 @@
         "Accounts",
         "afterAll",
         "afterEach",
-		"angular",
-		"assert",
+        "angular",
+        "assert",
         "Assets",
         "beforeAll",
         "beforeEach",
@@ -115,6 +115,8 @@
         "Template",
         "Tinytest",
         "Tracker",
-        "xdescribe"
+        "xdescribe",
+        "React",
+        "ReactDOM"
     ]
 }

@@ -21,9 +21,13 @@ export PATH
 #  Specific Paths
 export NODE_PATH="/usr/local/lib/node_modules"
 export GOPATH="/Users/$USER/Code/go/"
+export GOROOT="/usr/local/go"
 
 #  thefuck
 eval $(thefuck --alias)
+
+#  rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 #  Util functions
 function md () { mkdir -p "$@" && eval cd "\"\$$#\""; }
